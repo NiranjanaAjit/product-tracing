@@ -9,14 +9,31 @@ const DataComponent = () => {
             .then(data => setData(data))
             .catch(error => console.error('Error:', error));
     }, []);
-
+    console.log(data)
     return (
         <div>
-            {data ? (
-                <p>Data from Flask API: {data.message}</p>
+            {
+            data ? (
+                // <p>Data from Flask API: {data.message}</p>
+                <div className='display-div'>
+                  <p>blockchain :  </p>
+                  {Object.keys(data).map(key => (
+                  <div key={key} className='array-div'>
+                    <p>Array {key}:</p>
+                      <div className='node-div'> 
+                        {data[key].map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </div>
+                    
+                  </div>
+                    )
+                    )}
+                </div>
             ) : (
                 <p>Loading...</p>
             )}
+            
         </div>
     );
 };
