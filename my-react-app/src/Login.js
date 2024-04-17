@@ -6,9 +6,19 @@ const Login = () => {
     return (
         <div>
             <h2>Login Page</h2>
-            {/* Your login form */}
+            
             <form>
-                {/* Login form fields */}
+                <label>
+                    Username:
+                    <input type="text" name="username" />
+                </label>
+                <br />
+                <label>
+                    Password:
+                    <input type="password" name="password" />
+                </label>
+                <br />
+                <input type="submit" value="Submit" />
             </form>
         </div>
     );

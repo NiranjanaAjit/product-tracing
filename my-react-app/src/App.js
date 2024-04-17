@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import FormComponent from './FormComponent';
 import DataComponent from './DataComponent';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import Login from './Login';
 
 const App = () => {
     return (
@@ -16,7 +17,12 @@ const App = () => {
                 <Link to="/login">
                     <button>Login</button>
                 </Link>
+                <Routes>
+                    <Route path="/login" element = {<Login />} />
+                        {/* <Login/> Render LoginComponent when the path is "/login" */}
+                </Routes>
             </Router>
+
             {/* <Link to="/login">
                 <button>Login</button>
             </Link> */}

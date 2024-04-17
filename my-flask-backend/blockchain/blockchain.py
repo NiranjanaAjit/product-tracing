@@ -3,6 +3,8 @@ from web3 import Web3, HTTPProvider
 import json
 import os
 
+# print("hello")
+
 # truffle development blockchain address
 blockchain_address = 'http://localhost:9545'
  
@@ -13,9 +15,11 @@ web3 = Web3(HTTPProvider(blockchain_address))
 web3.eth.defaultAccount = web3.eth.accounts[0]
 
 
-compiled_contract_path = 'build/contracts/gfg.json'
+compiled_contract_path = 'E:\\projects\\finalproject\\product-tracing\\my-flask-backend\\blockchain\\build\\contracts\\gfg.json'
 deployed_contract_address = '0x80261cD982328aF68e7dB8409270F2E6E902eb1B'
- 
+
+
+
 # load contract info as JSON
 with open(compiled_contract_path) as file:
     contract_json = json.load(file)  
@@ -26,11 +30,10 @@ with open(compiled_contract_path) as file:
 
 contract = web3.eth.contract(
     address = deployed_contract_address, abi = contract_abi)
-
+print(contract)
 blockchain=contract.functions.getBlockchain().call()
 
 print('*********************************')
-
 print("current blockchain : ")
 if len(blockchain)==0:
     print("blockchain empty")
@@ -47,11 +50,15 @@ else:
         json.dump(data, f)
 print('*********************************')
 
-flag = 1
-while flag:
+# flag = 1
+
+while True:
     if os.path.exists('.\\formdata.json'):
+        print("file exists")
         f=open('.\\formdata.json','r')
         descr=f.readline()
+        print(descr)
+        print("hello")
         prev_addr=descr
         product_id=descr
         # descr=input("description : ")
