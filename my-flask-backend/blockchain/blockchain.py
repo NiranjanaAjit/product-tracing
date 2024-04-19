@@ -15,7 +15,7 @@ web3 = Web3(HTTPProvider(blockchain_address))
 web3.eth.defaultAccount = web3.eth.accounts[0]
 
 
-compiled_contract_path = 'E:\\projects\\finalproject\\product-tracing\\my-flask-backend\\blockchain\\build\\contracts\\gfg.json'
+compiled_contract_path = 'build\\contracts\\gfg.json'
 deployed_contract_address = '0x80261cD982328aF68e7dB8409270F2E6E902eb1B'
 
 
