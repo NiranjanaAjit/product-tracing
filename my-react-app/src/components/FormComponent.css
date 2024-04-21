@@ -1,0 +1,22 @@
+.input-box{
+    font-weight: bold;
+    font-size: large;
+    padding: 5%;
+    background-color: cornsilk;
+    border: 15%;
+    border-style: solid;
+    border-color: darkslategrey;
+    border-radius: 10%;
+}
+
+.submit-button{
+    font-weight: bold;
+    font-size: large;
+    margin-top : 5%;
+    padding: 5%;
+    background-color: lightcoral;
+    border: 15%;
+    border-style: solid;
+    border-color: darkslategrey;
+    border-radius: 10%;
+}

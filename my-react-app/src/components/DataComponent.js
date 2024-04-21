@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import './DataComponent.css';
 const DataComponent = () => {
     const [data, setData] = useState(null);
-
+    const navigate = useNavigate();
     useEffect(() => {
         fetch('http://127.0.0.1:5000/api/data')
             .then(response => response.json())
@@ -12,6 +13,9 @@ const DataComponent = () => {
     console.log(data)
     return (
         <div>
+          <div className='sticky-div'>
+            <button classname='go-home' name= 'go-home' onClick={() => navigate('/')}>Go Home</button>
+          </div>
             {
             data ? (
                 // <p>Data from Flask API: {data.message}</p>
@@ -33,6 +37,7 @@ const DataComponent = () => {
             ) : (
                 <p>Loading...</p>
             )}
+          
             
         </div>
     );

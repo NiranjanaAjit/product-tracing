@@ -1,0 +1,46 @@
+.display-div{
+    /* display: flex; */
+    flex-direction: column;
+    padding-top: 15%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    font-size: calc(10px + 2vmin);
+    color: black;
+    background-color: pink;
+    min-height: 100vh;
+    border-style: solid;
+    border-color: darkslategrey;
+    border-radius: 1%;
+    font-family: monospace;
+    height: 100%;
+}
+.node-div{
+    padding: 5%;
+    font-style: italic;
+    font-size: calc(10px + 2vmin);
+    background-color: lightsalmon;
+    border-radius: 20%;
+}
+
+.sticky-div{
+    width: 100%;
+    position : fixed;
+    padding: 5%;
+    flex-direction: column;
+    background-color: lightcoral;
+    border-bottom: 2%;
+    border-style: solid;
+    border-color: darkslategrey;
+}
+
+.go-home{
+    font-family: Courier New;
+    padding: 5%;
+    font-size: xx-large;
+    
+}
+
+.go-home:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
