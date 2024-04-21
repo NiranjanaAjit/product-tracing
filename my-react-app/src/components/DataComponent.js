@@ -14,8 +14,11 @@ const DataComponent = () => {
     return (
         <div>
           <div className='sticky-div'>
-            <button classname='go-home' name= 'go-home' onClick={() => navigate('/')}>Go Home</button>
+                  <button className="submit-button" onClick={() => navigate('/')}>
+                      HOME
+                  </button>
           </div>
+          
             {
             data ? (
                 // <p>Data from Flask API: {data.message}</p>

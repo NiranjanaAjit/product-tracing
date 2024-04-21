@@ -1,19 +1,56 @@
-.display-div{
-    /* display: flex; */
-    flex-direction: column;
-    padding-top: 15%;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 5%;
-    font-size: calc(10px + 2vmin);
-    color: black;
-    background-color: pink;
-    min-height: 100vh;
+body{
+    padding-top: 5%;
+    /* overflow: hidden; */
+}
+
+.sticky-div .submit-button{
+    background-color: cornsilk;
+    padding: 1%;
+    margin: 0.5%;
+    top:0;
+    right:0;
+}
+.sticky-div{
+    top:0;
+    left:0;
+    width: 100%;
+    height: 10%;
+    margin-right: auto;
+    position : fixed;
+    padding: 1%;
+    text-align: right;
+    /* margin: 5%; */
+    /* flex-direction: column; */
+    background-color: lightcoral;
+    border: 2%;
     border-style: solid;
     border-color: darkslategrey;
-    border-radius: 1%;
-    font-family: monospace;
+}
+
+/* .submit-button{
+    font-weight: bold;
+    font-size: large;
+    padding: 5%;
+    background-color: lightcoral;
+    border: 15%;
+    border-style: solid;
+    border-color: darkslategrey;
+    border-radius: 10%;
+} */
+
+.display-div{
+    margin-top: 10%;
+    width: 100%;
     height: 100%;
+    font-weight: bold;
+    font-size: large;
+    padding: 5%;
+    background-color: cornsilk;
+    border: 10px;
+    border-style: solid;
+    border-color: darkslategrey;
+    border-radius: 10%;
+    text-align: center;
 }
 .node-div{
     padding: 5%;
@@ -21,26 +58,4 @@
     font-size: calc(10px + 2vmin);
     background-color: lightsalmon;
     border-radius: 20%;
-}
-
-.sticky-div{
-    width: 100%;
-    position : fixed;
-    padding: 5%;
-    flex-direction: column;
-    background-color: lightcoral;
-    border-bottom: 2%;
-    border-style: solid;
-    border-color: darkslategrey;
-}
-
-.go-home{
-    font-family: Courier New;
-    padding: 5%;
-    font-size: xx-large;
-    
-}
-
-.go-home:hover {
-    background-color: #45a049; /* Darker green on hover */
 }

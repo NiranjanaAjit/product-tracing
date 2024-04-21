@@ -22,19 +22,20 @@ const FormComponent = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input className='input-box'
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Enter data"
-            />
-            <br/>
-            <button className='submit-button' type="submit">
-                Update blockchain
-                {/* <a href='/display'></a> */}
-            </button>
-        </form>
+        <div className='form-body'>
+            <form onSubmit={handleSubmit}>
+                <input className='input-box'
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    placeholder="Enter data"
+                />
+                <br/>
+                <button className='submit-button' type="submit">
+                    Update blockchain
+                </button>
+            </form>
+        </div>
     );
 };
 

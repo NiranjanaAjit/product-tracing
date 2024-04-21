@@ -10,6 +10,7 @@ body {
 .home{
     
     /* padding-top: 1; */
+    text-align: center;
     width: 100%;
     height: 100%;
     font-weight: bold;
@@ -21,6 +22,19 @@ body {
     border-color: darkslategrey;
     border-radius: 10%;
 }
+
+.submit-button{
+    font-weight: bold;
+    font-size: large;
+    margin : 5%;
+    padding: 5%;
+    background-color: lightcoral;
+    border: 15%;
+    border-style: solid;
+    border-color: darkslategrey;
+    border-radius: 10%;
+}
+
 /* 
 .home-title {
     color: #333;
