@@ -5,8 +5,13 @@ const DataComponent = () => {
     const [data, setData] = useState(null);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/api/data')
+        fetch('http://127.0.0.1:5000/api/data',{
+        method: 'GET',
+        headers:{
+          'Content-Type': 'application/json'
+        }})
             .then(response => response.json())
+
             .then(data => setData(data))
             .catch(error => console.error('Error:', error));
     }, []);

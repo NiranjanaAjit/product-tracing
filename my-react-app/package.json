@@ -16,7 +16,7 @@
     "start": "concurrently \"npm run react-start\" \"npm run flask-start\" \"npm run python-start\"",
     "react-start": "react-scripts start",
     "_comment" : "truffle-migrate: cd ../my-flask-backend/blockchain && truffle migrate --network development",
-    "python-start": "cd ../my-flask-backend/blockchain && python blockchain.py",
+    "python-start": "cd ../my-flask-backend/blockchain && python bc.py",
     "flask-start": "cd ../my-flask-backend && python app.py",
     "build": "react-scripts build",
     "test": "react-scripts test",
