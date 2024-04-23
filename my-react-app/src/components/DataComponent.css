@@ -4,7 +4,7 @@ body{
 }
 
 .sticky-div .submit-button{
-    background-color: cornsilk;
+    background-color: white;
     padding: 1%;
     margin: 0.5%;
     top:0;
@@ -21,7 +21,7 @@ body{
     text-align: right;
     /* margin: 5%; */
     /* flex-direction: column; */
-    background-color: cornsilk;
+    background-color: white;
     
     border: 2%;
     border-style: solid;
@@ -46,7 +46,7 @@ body{
     font-weight: bold;
     font-size: large;
     padding: 5%;
-    background-color: cornsilk;
+    background-color: white;
     border: 10px;
     border-style: solid;
     border-color: darkslategrey;
@@ -57,6 +57,6 @@ body{
     padding: 5%;
     font-style: italic;
     font-size: calc(10px + 2vmin);
-    background-color: lightsalmon;
+    background-color: cornsilk;
     border-radius: 20%;
 }

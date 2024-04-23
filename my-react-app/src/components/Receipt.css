@@ -1,0 +1,22 @@
+.sticky-div{
+    top:0;
+    left:0;
+    width: 100%;
+    height: 10%;
+    margin-right: auto;
+    position : fixed;
+    padding: 1%;
+    text-align: right;
+    margin-bottom: 5%;
+    /* flex-direction: column; */
+    background-color: white;
+    
+    border: 2%;
+    border-style: solid;
+    border-color: darkslategrey;
+}
+
+
+.receipt-heading{
+    margin-top: 10%;
+}

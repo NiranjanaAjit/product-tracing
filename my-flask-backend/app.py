@@ -12,9 +12,9 @@ contracts=[]
 app = Flask(__name__)
 CORS(app, origins="*")
 
+
 def print_blockchain(blockchain,w3):
-    data = {}
-    
+    data={}
     for i in range(len(blockchain)):
         block = w3.eth.get_block(i)
         n=block["number"]
@@ -54,10 +54,29 @@ def add_block(w3,index):
     else:
         prev_addr = list(map(int,p.split(" ")))
     product_id=data['productId']
+    balance_before = w3.eth.get_balance(w3.eth.accounts[0])
     trans = contract.functions.addBlock(descr,prev_addr,product_id).transact({'from':w3.eth.accounts[0]})
     receipt = w3.eth.wait_for_transaction_receipt(trans)
     gas_cost = receipt['gasUsed']
     print("Gas used:", gas_cost)
+    print("Transaction receipt:", receipt)
+
+    receipt_data = {
+        'balance-before': balance_before,
+        'transaction_hash': receipt['transactionHash'].hex(),
+        'block_number': receipt['blockNumber'],
+        'gas_used': receipt['gasUsed'],
+        'status': receipt['status'],
+        'from': receipt['from'],
+        'to': receipt['to'],
+        'balance-after': w3.eth.get_balance(w3.eth.accounts[0])
+
+
+    }
+
+    with open('blockchain/receipt.json', 'w') as f:
+        json.dump(receipt_data, f)
+
     data = {}
     blockchain = contract.functions.getBlockchain().call()
     for i in range(len(blockchain)):
@@ -179,7 +198,11 @@ def get_data():
         json_data = json.load(file)
     return jsonify(json_data)
 
-
+@app.route('/api/receipt', methods=['GET'])
+def get_receipt():
+    with open('blockchain/receipt.json') as file:
+        json_data = json.load(file)
+    return jsonify(json_data)
 
 if __name__ == '__main__':
     start_node(9545)

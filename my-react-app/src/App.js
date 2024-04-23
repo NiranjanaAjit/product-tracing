@@ -5,6 +5,7 @@ import DataComponent from './components/DataComponent';
 // import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import Home from './components/Home';
+import Receipt from './components/Receipt';
 
 
 
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/display" element={<DataComponent />}></Route>
             <Route path="/add" element={<FormComponent />}></Route>
+            <Route path="/receipt" element={<Receipt />}></Route>
         </Routes>
         </Router>
 

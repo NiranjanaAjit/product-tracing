@@ -19,12 +19,14 @@ const FormComponent = () => {
             body: JSON.stringify({ descr, prevAddr, productId })
         });
         if (response.ok) {
+
             const data = await response.json();  // Parse the JSON response
             console.log(data);  // Log the data for debugging
         } else {
             console.error('Error:', response.status, response.statusText);
+        
         }
-        navigate('/');
+        navigate('/receipt');
     };
 
     return (
@@ -38,6 +40,7 @@ const FormComponent = () => {
                     placeholder="Enter description"
                 />
                 <br/>
+                <br/>
                 <label>Previous Blocks</label>
                 <input className='input-box'
                     type="text"
@@ -46,6 +49,7 @@ const FormComponent = () => {
                     placeholder="Enter previous address"
                 />
                 <br/>
+                <br/>
                 <label>Product ID</label>
                 <input className='input-box'
                     type="text"
@@ -53,7 +57,7 @@ const FormComponent = () => {
                     onChange={(e) => setProductId(e.target.value)}
                     placeholder="Enter product id"
                 />
-
+                <br/>
                 <br/>
                 <button className='submit-button' type="submit">
                     Update blockchain
