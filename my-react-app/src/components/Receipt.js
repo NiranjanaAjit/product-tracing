@@ -21,22 +21,26 @@ const Receipt = () => {
     return(
         <div>
             <div className='sticky-div'>
-                  <button className="submit-button" onClick={() => navigate('/')}>
+                  <button className="home-button" onClick={() => navigate('/')}>
                       HOME
                   </button>
             </div>
+            
             <h1 className='receipt-heading'>Receipt</h1>
+            <h2> Successfully added to blockchain !!! </h2>
+
             {
-            data ? (
-                // <p>Data from Flask API: {data.message}</p>
-                <div className='display-div'>
-                    {Object.keys(data).map((key, index) => (
-                        <p key={index}>{key}: {data[key]}</p>
-                    ))}
-                </div>
-            ) : (
-                <p>Loading...</p>
-            )}
+                data ? (
+                    // <p>Data from Flask API: {data.message}</p>
+                    <div className='receipt-div'>
+                        {Object.keys(data).map((key, index) => (
+                            <p key={index}>{key}: {data[key]}</p>
+                        ))}
+                    </div>
+                ) : (
+                    <p>Loading...</p>
+                )
+            }
 
         </div>
     )

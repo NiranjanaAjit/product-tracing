@@ -2,7 +2,7 @@ body {
     width: 100%;
     /* max-width: 600px; */
     margin: 5%;
-    padding: 20px;
+    /* padding: 20px; */
     background-color: white;
     
 }
@@ -13,7 +13,7 @@ body {
     height: 100%;
     font-weight: bold;
     font-size: large;
-    padding: 5%;
+    /* padding: 5%; */
     background-color: white;
     border: 10px solid darkslategrey;
     border-radius: 10%;
@@ -22,7 +22,7 @@ body {
 .submit-button {
     font-weight: bold;
     font-size: large;
-    margin: 5%;
+    margin: 3%;
     padding: 5%;
     background-color: white;
     border: 15% solid darkslategrey;

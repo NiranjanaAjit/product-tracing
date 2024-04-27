@@ -9,7 +9,7 @@ export default function Home(){
         event.preventDefault();
         // Send input data to backend
         
-        const response = await fetch('http://localhost:5000/api/button', {
+        const response = await fetch('http://localhost:5000/api/menu', {
             method: 'POST',
             mode: 'no-cors',
             headers: {
@@ -37,20 +37,7 @@ export default function Home(){
 
         <div className="home">
             <h1>Product Tracing System</h1>
-            {/* {console.log('hello')} */}
-            {/* <p>Click on the links below to navigate</p> */}
-            {/* <ul>
-                <li><a href="/display">Display blockchain</a></li>
-                <li><a href="/add">Add a new block</a></li>
-
-                <li><a href="/login">Login</a></li>
-            </ul> 
-            <a href="/display">
-            <a href="/add">
-            </a>
-            </a>
-
-            */}
+            
             <button className="submit-button" name="display" onClick={handleClick}>
                     Display blockchain
             </button>
@@ -58,6 +45,11 @@ export default function Home(){
             <button className="submit-button" name="add" onClick={handleClick}>
                     Add a new block
             </button>
+
+            <button className="submit-button" name="search" onClick={handleClick}>
+                    Search details of the block
+            </button>
+
             
             
         </div>

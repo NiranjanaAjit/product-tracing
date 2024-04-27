@@ -2,10 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Routes , Route} from "react-router-dom";
 import FormComponent from './components/FormComponent';
 import DataComponent from './components/DataComponent';
-// import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import Home from './components/Home';
 import Receipt from './components/Receipt';
+import Search from './components/Search';
+import BlockDetails from './components/BlockDetails';
 
 
 
@@ -19,6 +20,8 @@ const App = () => {
             <Route path="/display" element={<DataComponent />}></Route>
             <Route path="/add" element={<FormComponent />}></Route>
             <Route path="/receipt" element={<Receipt />}></Route>
+            <Route path="/search" element={<Search />}></Route>
+            <Route path="/blockdetails" element={<BlockDetails/>}></Route>
         </Routes>
         </Router>
 

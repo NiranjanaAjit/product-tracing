@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './DataComponent.css';
-const DataComponent = () => {
+
+const BlockDetails = () => {
     const [data, setData] = useState(null);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/api/data',{
+        fetch('http://127.0.0.1:5000/api/blockdetails',{
         method: 'GET',
         headers:{
           'Content-Type': 'application/json'
@@ -26,10 +26,8 @@ const DataComponent = () => {
           
             {
             data ? (
-              
                 // <p>Data from Flask API: {data.message}</p>
                 <div className='display-div'>
-                  {console.log(data)}
                   <p>blockchain :  </p>
                   {Object.keys(data).map((key, index) => (
             <div key={index}>
@@ -62,4 +60,4 @@ const DataComponent = () => {
     );
 };
 
-export default DataComponent;
+export default BlockDetails;

@@ -1,36 +1,48 @@
 .form-body{
-    width: 100%;
+    width: max-content;
     height: 100%;
     font-weight: bold;
     font-size: large;
     padding: 5%;
-    background-color: cornsilk;
+    background-color: white;
     border: 10px;
     border-style: solid;
     border-color: darkslategrey;
     border-radius: 10%;
     text-align: center;
+    flex-direction: row;
+    display: flex;
 
 }
 
+.inputs{
+    margin-top: 15% ;
+    margin-bottom: 15%;
+    padding-top: 25%;
+}
+.label-inputs{
+    padding-top:5%
+}
 .input-box{
     margin-left: 5%;
     font-weight: bold;
     font-size: large;
-    padding: 5%;
-    background-color: cornsilk;
+    padding: 2%;
+    margin: right 5%;
+    background-color: white;
     border: 15%;
     border-style: solid;
     border-color: darkslategrey;
     border-radius: 10%;
+    flex-direction: row;
 }
 
-.submit-button{
+.update-button{
     font-weight: bold;
     font-size: large;
     margin-top : 5%;
     padding: 5%;
-    background-color: lightcoral;
+    background-color: cornsilk;
     border: 15%;
     border-style: solid;
     border-color: darkslategrey;

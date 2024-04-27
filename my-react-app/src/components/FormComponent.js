@@ -31,8 +31,24 @@ const FormComponent = () => {
 
     return (
         <div className='form-body'>
-            <form onSubmit={handleSubmit}>
-                <label>Description</label>
+            
+                <div className='label-inputs'>
+                    <label className='inputs'>Description</label>
+                    <br/>
+                    <br/>
+                
+
+                    <label className='inputs'>Previous Addess</label>
+                    <br/>
+                <br/>
+
+                    <label className='inputs'>Product ID</label>
+                    <br/>
+                <br/>
+
+                </div>
+                <div>
+                <form onSubmit={handleSubmit}>
                 <input className='input-box'
                     type="text"
                     value={descr}
@@ -41,7 +57,7 @@ const FormComponent = () => {
                 />
                 <br/>
                 <br/>
-                <label>Previous Blocks</label>
+                
                 <input className='input-box'
                     type="text"
                     value={prevAddr}
@@ -50,7 +66,7 @@ const FormComponent = () => {
                 />
                 <br/>
                 <br/>
-                <label>Product ID</label>
+                
                 <input className='input-box'
                     type="text"
                     value={productId}
@@ -59,10 +75,14 @@ const FormComponent = () => {
                 />
                 <br/>
                 <br/>
-                <button className='submit-button' type="submit">
+                <button className='update-button' type="submit">
                     Update blockchain
                 </button>
-            </form>
+                </form>
+                </div>
+
+                
+            
         </div>
     );
 };
