@@ -116,11 +116,16 @@ def search_block():
     data = request.get_json()
     block_number = data.get('input')
     port = 9545
-    index = ports_in_use.index(port)
-    w3 = Web3_instances[index]
-    block = w3.eth.get_block(block_number)
+    # block_number = int(block_number)
+    # index = ports_in_use.index(port)
+    f=open('blockchain/bcdata.json','r')
+    data=json.load(f)
+    block_data = data[str(block_number)]
+    # w3 = Web3_instances[index]
+    # block = w3.eth.get_block(block_number)
     f2=open('blockchain/blockdata.json','w')
-    json.dump({'block_number': block.number, 'block_hash': block.hash, 'block_timestamp': block.timestamp},f2)
+    json.dump(block_data,f2)
+    # json.dump({'block_number': block.number, 'block_hash': block.hash, 'block_timestamp': block.timestamp},f2)
     return jsonify({'searched for block': block_number})
 
 

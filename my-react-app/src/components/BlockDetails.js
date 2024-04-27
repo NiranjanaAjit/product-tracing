@@ -30,26 +30,8 @@ const BlockDetails = () => {
                 <div className='display-div'>
                   <p>blockchain :  </p>
                   {Object.keys(data).map((key, index) => (
-            <div key={index}>
-                <h2>Block {key}:</h2>
-                {Object.entries(data[key]).map(([key, value], index) => (
-                    <p key={index}>{key}: {value.toString()}</p>
-                ))}
-            </div>
-        ))}
-
-                  {/* {Object.keys(data).map(key => (
-                  <div key={key} className='array-div'>
-                    <p>Array {key}:</p>
-                      <div className='node-div'> 
-                        {data[key].map((item, index) => (
-                          <li key={index}>{item}</li>
+                            <p key={index}>{key}: {data[key]}</p>
                         ))}
-                      </div>
-                    
-                  </div>
-                    )
-                    )} */}
                 </div>
             ) : (
                 <p>Loading...</p>
