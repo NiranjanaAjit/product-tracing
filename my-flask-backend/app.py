@@ -6,40 +6,11 @@ from datetime import datetime
 
 
 #global variables
-ports_in_use = [9545]
+ports_in_use = [9545,9090]
 Web3_instances = []
 contracts=[]
 app = Flask(__name__)
 CORS(app, origins="*")
-
-
-# def print_blockchain(blockchain,w3):
-#     data={}
-#     for i in range(len(blockchain)):
-#         block = w3.eth.get_block(i)
-#         n=block["number"]
-#         l=blockchain[i]
-#         #l.append(block["number"])
-#         #l.append(block["hash"])
-#         #l.append(datetime.fromtimestamp(block["timestamp"]))
-
-#         # data[n] = l
-#         data[n] = {'descr': blockchain[i][0], 'prev_blocks': blockchain[i][1], 'product_id': blockchain[i][2]}
-#         # print(block)
-#         data[n].append(block["number"])
-#         print(f"Block Number: {block.number}")
-#         print(f"Block Hash: {block.hash}")
-#         # print(f"Block time stamp: {datetime.fromtimestamp(block.timestamp)}")
-#         print("Block Data: ",blockchain[i])
-#         # block_data = blockchain[i]
-#         # if len(block_data[1])!=0:
-#           #  for i in range(len(block_data[1])):
-#                 # print(f"Product ID: {block_data[1][i]}")
-#                # child_block = w3.eth.get_block(block_data[1][i])
-
-#     with open('blockchain/bcdata.json', 'w') as f:
-#         json.dump(data, f)
-
 
 def print_balance(w3):
     balance = w3.eth.get_balance(w3.eth.accounts[0])
@@ -80,15 +51,6 @@ def add_block(w3,index):
     with open('blockchain/receipt.json', 'w') as f:
         json.dump(receipt_data, f)
 
-    # data = {}
-    # blockchain = contract.functions.getBlockchain().call()
-    # for i in range(len(blockchain)):
-    #     block = w3.eth.get_block(i)
-    #     n=block["number"]
-    #     data[n] = {'descr': blockchain[i][0], 'prev_blocks': blockchain[i][1], 'product_id': blockchain[i][2]}
-
-    # with open('blockchain/bcdata.json', 'w') as f:
-    #     json.dump(data, f)
 
 
 def start_node(port):
@@ -109,6 +71,36 @@ def start_node(port):
     contracts.append(contract)
     ports_in_use.append(port)
     Web3_instances.append(w3)
+
+
+@app.route('/api/searchwithpeoductid',methods = ['POST'])
+def search_with_product_id():
+    data = request.get_json()
+    product_id = data.get('input')
+    port = 9545
+    index = ports_in_use.index(port)
+    w3 = Web3_instances[index]
+
+    f=open('blockchain/bcdata.json','r')
+    data=json.load(f)
+    found = False
+    for i in data:
+        if i['product_id']==product_id:  
+            found = True
+            block_data = i
+            break
+
+    if found:
+        f2=open('blockchain/blockdata.json','w')
+        json.dump(block_data,f2)
+        return jsonify({'searched for product_id': product_id})
+    else:
+        block_data = {'message': 'product_id not found'}
+        f2=open('blockchain/blockdata.json','w')
+        json.dump(block_data,f2)
+        return jsonify({'product_id not found': product_id})
+
+
 
 
 @app.route('/api/searchblock', methods=['POST'])
@@ -134,117 +126,67 @@ def button_data():
     data = request.get_json()  # Get input data from the request
     a = data.get('input')
     
-    
-      # Extract the input value
-    # Process the input data (example: convert to uppercase)
-    # if a == 'displayblock':
-    #     print("Get block details")
-    #     block_number = int(input("Enter block number: "))
-    #     #port = input("Enter port number of node: ")
-    #     port=9545
-    #     # if port in ports_in_use:
-    #     index = ports_in_use.index(port)
-        
-    #     #     # continue with the rest of the code
-    #     # else:
-    #     #     print("Port not found in ports_in_use")
-    #     w3 = Web3_instances[index]
-    #     block = w3.eth.get_block(block_number)
-    #     print(f"Block Number: {block.number}")
-    #     print(f"Block Hash: {block.hash}")
-    #     print(f"Block time stamp: {datetime.fromtimestamp(block.timestamp)}")
-    
     if a =='search':
         index = ports_in_use.index(port)
         w3 = Web3_instances[index]
         
-        # f1=open('blockchain/blocknum.json','r')
-        # data=json.load(f1)
-        # block_number = data['input']
-        # block = w3.eth.get_block(block_number)
-        # f2=open('blockchain/blockdata.json','w')
-        # json.dump({'block_number': block.number, 'block_hash': block.hash, 'block_timestamp': block.timestamp},f2)
-
     elif a == 'display':
         print("Get blockchain details")
         port = 9545
         index = ports_in_use.index(port)
-        # print(index)
-        # w3 = Web3_instances[index]
-        # contract = contracts[index]
-        # blockchain = contract.functions.getBlockchain().call()
-        # data={}
-        # blockchain = contract.functions.getBlockchain().call()
-        # for i in range(len(blockchain)):
-        #     block = w3.eth.get_block(i)
-        #     n=block["number"]
-        #     data[i] = {'descr': blockchain[i][0], 'prev_blocks': blockchain[i][1], 'product_id': blockchain[i][2]}
 
-        #     # , 'block_number': block.number, 'block_hash': block.hash, 'block_timestamp': datetime.fromtimestamp(block.timestamp)
-        # print(data)
-        # with open('blockchain/bcdata.json', 'w') as f:
-        #     json.dump(data, f)
+
+    # elif a == 'add':
         
-        
-        # print("current blockchain : ")
-        # if len(blockchain)==0:
-        #     print("blockchain empty")
-        # else:
-        #     print_blockchain(blockchain,w3)
+    #     print("Add a block")
+    #     # port = input("Enter port number of node: ")
+    #     port = 9545
+    #     # if port in ports_in_use:
+    #     index = ports_in_use.index(port)
+    #     #     # continue with the rest of the code
+    #     # else:
+    #     #     print("Port not found in ports_in_use")
+    #     w3 = Web3_instances[index]
+    #     print('balance before adding block')
+    #     print_balance(w3)
+    #     # add_block(w3,index)
+    #     contract = contracts[index]
+    #     f=open('blockchain\\formdata.json','r')
+    #     data=json.load(f)
+    #     descr = data['descr']
+    #     p=data['prevAddr']
+    #     if p=="":
+    #         prev_addr = []
+    #     else:
+    #         prev_addr = list(map(int,p.split(" ")))
+    #     product_id=data['productId']
+    #     balance_before = w3.eth.get_balance(w3.eth.accounts[0])
+    #     trans = contract.functions.addBlock(descr,prev_addr,product_id).transact({'from':w3.eth.accounts[0]})
+    #     receipt = w3.eth.wait_for_transaction_receipt(trans)
+    #     gas_cost = receipt['gasUsed']
+    #     print("Gas used:", gas_cost)
+    #     print("Transaction receipt:", receipt)
 
-
-    elif a == 'add':
-        
-        print("Add a block")
-        # block_data = input("Enter block data: ")
-        # port = input("Enter port number of node: ")
-        port = 9545
-        # if port in ports_in_use:
-        index = ports_in_use.index(port)
-        #     # continue with the rest of the code
-        # else:
-        #     print("Port not found in ports_in_use")
-        w3 = Web3_instances[index]
-        print('balance before adding block')
-        print_balance(w3)
-        # add_block(w3,index)
-        contract = contracts[index]
-        f=open('blockchain\\formdata.json','r')
-        data=json.load(f)
-        descr = data['descr']
-        p=data['prevAddr']
-        if p=="":
-            prev_addr = []
-        else:
-            prev_addr = list(map(int,p.split(" ")))
-        product_id=data['productId']
-        balance_before = w3.eth.get_balance(w3.eth.accounts[0])
-        trans = contract.functions.addBlock(descr,prev_addr,product_id).transact({'from':w3.eth.accounts[0]})
-        receipt = w3.eth.wait_for_transaction_receipt(trans)
-        gas_cost = receipt['gasUsed']
-        print("Gas used:", gas_cost)
-        print("Transaction receipt:", receipt)
-
-        receipt_data = {
-            'balance-before': balance_before,
-            'transaction_hash': receipt['transactionHash'].hex(),
-            'gas_used': receipt['gasUsed'],
-            'status': receipt['status'],
-            'from': receipt['from'],
-            'to': receipt['to'],
+    #     receipt_data = {
+    #         'balance-before': balance_before,
+    #         'transaction_hash': receipt['transactionHash'].hex(),
+    #         'gas_used': receipt['gasUsed'],
+    #         'status': receipt['status'],
+    #         'from': receipt['from'],
+    #         'to': receipt['to'],
             
-            # 'time_stamp' : datetime.fromtimestamp(receipt['timestamp']),
-            'balance-after': w3.eth.get_balance(w3.eth.accounts[0])
-        }
-        print('receipt data', receipt_data)
-        with open('blockchain/receipt.json', 'w') as f:
-            json.dump(receipt_data, f)
-        print('written to recept file')
+    #         # 'time_stamp' : datetime.fromtimestamp(receipt['timestamp']),
+    #         'balance-after': w3.eth.get_balance(w3.eth.accounts[0])
+    #     }
+    #     print('receipt data', receipt_data)
+    #     with open('blockchain/receipt.json', 'w') as f:
+    #         json.dump(receipt_data, f)
+    #     print('written to recept file')
 
 
 
-        print('balance after adding block')
-        print_balance(w3)
+    #     print('balance after adding block')
+    #     print_balance(w3)
 
    
 
@@ -283,7 +225,6 @@ def get_data():
     print(index)
     w3 = Web3_instances[index]
     contract = contracts[index]
-    blockchain = contract.functions.getBlockchain().call()
     data={}
     blockchain = contract.functions.getBlockchain().call()
     for i in range(len(blockchain)):
@@ -304,6 +245,57 @@ def get_receipt():
         json_data = json.load(file)
     return jsonify(json_data)
 
+
+@app.route('/api/addrawmaterial', methods=['POST'])
+def addrawmaterial():
+    # start_node
+    data = request.get_json()
+    port = 9545
+    rawmaterial = data.get('rawmaterial')
+    productid = data.get('productid')
+    index = ports_in_use.index(port)
+    w3 = Web3_instances[index]
+    contract = contracts[index]
+    trans = contract.functions.addBlock(rawmaterial,[],productid).transact({'from':w3.eth.accounts[0]})
+    receipt = w3.eth.wait_for_transaction_receipt(trans)
+    gas_cost = receipt['gasUsed']
+    print("Gas used:", gas_cost)
+    print("Transaction receipt:", receipt)
+    balance_before = w3.eth.get_balance(w3.eth.accounts[0])
+    receipt_data = {
+        'balance-before': balance_before,
+        'transaction_hash': receipt['transactionHash'].hex(),
+        'gas_used': receipt['gasUsed'],
+        'status': receipt['status'],
+        'from': receipt['from'],
+        'to': receipt['to'],
+        
+        # 'time_stamp' : datetime.fromtimestamp(receipt['timestamp']),
+        'balance-after': w3.eth.get_balance(w3.eth.accounts[0])
+    }
+    print('receipt data', receipt_data)
+    with open('blockchain/receipt.json', 'w') as f:
+        json.dump(receipt_data, f)
+    data={}
+    blockchain = contract.functions.getBlockchain().call()
+    for i in range(len(blockchain)):
+        block = w3.eth.get_block(i)
+        n=block["number"]
+        data[n] = {'descr': blockchain[i][0], 'prev_blocks': blockchain[i][1], 'product_id': blockchain[i][2], 'block_number': block.number, 'block_hash': block.hash.hex(), 'block_timestamp': datetime.fromtimestamp(block.timestamp).isoformat()}
+
+    print(data)
+    with open('blockchain/bcdata.json', 'w') as f:
+        json.dump(data, f)
+    
+    return jsonify(receipt_data)
+
+
+
+
+
 if __name__ == '__main__':
     start_node(9545)
+    print(Web3_instances)
+    # start_node(9090)
+    print(Web3_instances)
     app.run(debug=True)

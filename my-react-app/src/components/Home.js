@@ -50,6 +50,10 @@ export default function Home(){
                     Search details of the block
             </button>
 
+
+            <button className="submit-button" name="addrawmaterial" onClick={handleClick}>
+                    Add Raw Material
+            </button>
             
             
         </div>

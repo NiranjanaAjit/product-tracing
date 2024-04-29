@@ -7,7 +7,7 @@ import Home from './components/Home';
 import Receipt from './components/Receipt';
 import Search from './components/Search';
 import BlockDetails from './components/BlockDetails';
-
+import AddRawMaterial from './components/AddRawMaterial';
 
 
 
@@ -22,6 +22,7 @@ const App = () => {
             <Route path="/receipt" element={<Receipt />}></Route>
             <Route path="/search" element={<Search />}></Route>
             <Route path="/blockdetails" element={<BlockDetails/>}></Route>
+            <Route path="/addrawmaterial" element={<AddRawMaterial/>}></Route>
         </Routes>
         </Router>
 
