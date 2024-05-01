@@ -1,1 +1,1 @@
-{"descr": "what", "prev_blocks": [], "product_id": "98", "block_number": 1, "block_hash": "0x3c168f173c1896695d524725982afe0ab6f703997bf2a341d643d464b100f506", "block_timestamp": "2024-04-27T17:56:50"}
+{"descr": "cloth", "prev_blocks": [4], "product_id": "5", "block_number": 4, "block_hash": "0x1aedb2e8e6bb4e3a1068a0b28a64018969ab7880c267f2cf34ed817feba134a9", "block_timestamp": "2024-04-30T09:19:00"}

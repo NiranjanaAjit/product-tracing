@@ -38,7 +38,7 @@ const FormComponent = () => {
                     <br/>
                 
 
-                    <label className='inputs'>Previous Addess</label>
+                    <label className='inputs'>Used</label>
                     <br/>
                 <br/>
 
@@ -62,7 +62,7 @@ const FormComponent = () => {
                     type="text"
                     value={prevAddr}
                     onChange={(e) => setPrevAddr(e.target.value)}
-                    placeholder="Enter previous address"
+                    placeholder="Enter product IDs used"
                 />
                 <br/>
                 <br/>

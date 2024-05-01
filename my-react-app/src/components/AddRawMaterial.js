@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const AddRawMaterial = () => {
     const [rawmaterial, setrawmaterial] = useState('');
     const [productid, setproductid] = useState('');
+    // const [port, setPort] = useState('');
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -40,6 +41,9 @@ const AddRawMaterial = () => {
                     <br/>
                     <br/>
                     <label className='inputs'>Product ID</label>
+                    <br/>
+                    <br/>
+                    {/* <label className='inputs'>Port</label> */}
                 </div>
 
                 <div>
@@ -59,7 +63,13 @@ const AddRawMaterial = () => {
                 />
                 <br/>
                 <br/>
-                
+                {/* <input className='input-box'
+                    type="text"
+                    value={port}
+                    onChange={(e) => setPort(e.target.value)}
+                    placeholder="Enter port"
+                />
+                 */}
                 <button className='update-button' type="submit">
                     Add Raw Material
                 </button>

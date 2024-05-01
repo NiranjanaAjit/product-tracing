@@ -3,10 +3,11 @@ from flask_cors import CORS
 import json
 from web3 import Web3, HTTPProvider
 from datetime import datetime
-
+import subprocess
+import os
 
 #global variables
-ports_in_use = [9545,9090]
+ports_in_use = []
 Web3_instances = []
 contracts=[]
 app = Flask(__name__)
@@ -58,38 +59,53 @@ def start_node(port):
     w3 = Web3(HTTPProvider(f'http://localhost:{port}'))
     w3.eth.defaultAccount = w3.eth.accounts[0]
     compiled_contract_path = 'blockchain\\build\\contracts\\gfg.json'
-    deployed_contract_address = '0x80261cD982328aF68e7dB8409270F2E6E902eb1B'
-    
-    # load contract info as JSON
-    with open(compiled_contract_path) as file:
-        contract_json = json.load(file)  
-        
-        # fetch contract's abi - necessary to call its functions
-        contract_abi = contract_json['abi']
-    contract = w3.eth.contract(address = deployed_contract_address, abi = contract_abi)
-    # print(contract)
-    contracts.append(contract)
-    ports_in_use.append(port)
-    Web3_instances.append(w3)
+    deployed_contract_address = ''
+    if port == 9545:
+        deployed_contract_address = '0x80261cD982328aF68e7dB8409270F2E6E902eb1B'
+        # load contract info as JSON
+        with open(compiled_contract_path) as file:
+            contract_json = json.load(file)  
+            
+            # fetch contract's abi - necessary to call its functions
+            contract_abi = contract_json['abi']
+        contract = w3.eth.contract(address = deployed_contract_address, abi = contract_abi)
+        # print(contract)
+        contracts.append(contract)
+        ports_in_use.append(port)
+        Web3_instances.append(w3)
+    elif port == '9090':
+        deployed_contract_address = '0xcBa99367B8f26b2860745aBf257BE18FC949Bc6D'
+        # load contract info as JSON
+        with open(compiled_contract_path) as file:
+            contract_json = json.load(file)  
+            
+            # fetch contract's abi - necessary to call its functions
+            contract_abi = contract_json['abi']
+        contract = w3.eth.contract(address = deployed_contract_address, abi = contract_abi)
+        # print(contract)
+        contracts.append(contract)
+        ports_in_use.append(port)
+        Web3_instances.append(w3)
+    print(Web3_instances, contracts, ports_in_use)
 
 
-@app.route('/api/searchwithpeoductid',methods = ['POST'])
+@app.route('/api/searchblock',methods = ['POST'])
 def search_with_product_id():
     data = request.get_json()
     product_id = data.get('input')
     port = 9545
     index = ports_in_use.index(port)
     w3 = Web3_instances[index]
-
-    f=open('blockchain/bcdata.json','r')
-    data=json.load(f)
+    contract = contracts[index]
+    blockchain = contract.functions.getBlockchain().call()
     found = False
-    for i in data:
-        if i['product_id']==product_id:  
+    for i in range(len(blockchain)):
+        block = w3.eth.get_block(i)
+        n=block["number"]
+        if blockchain[i][2]==product_id:
             found = True
-            block_data = i
+            block_data = {'descr': blockchain[i][0], 'prev_blocks': blockchain[i][1], 'product_id': blockchain[i][2], 'block_number': block.number, 'block_hash': block.hash.hex(), 'block_timestamp': datetime.fromtimestamp(block.timestamp).isoformat()}
             break
-
     if found:
         f2=open('blockchain/blockdata.json','w')
         json.dump(block_data,f2)
@@ -102,8 +118,7 @@ def search_with_product_id():
 
 
 
-
-@app.route('/api/searchblock', methods=['POST'])
+@app.route('/api/hold', methods=['POST'])
 def search_block():
     data = request.get_json()
     block_number = data.get('input')
@@ -209,6 +224,7 @@ def process_data():
     with open('blockchain/formdata.json','w') as f:
         json.dump({'descr': descr, 'prevAddr': prevAddr, 'productId': productId}, f)
     add_block(Web3_instances[0],0)
+    # add_block(Web3_instances[1],1)
     return jsonify({'processed': data})
 
 
@@ -249,19 +265,23 @@ def get_receipt():
 @app.route('/api/addrawmaterial', methods=['POST'])
 def addrawmaterial():
     # start_node
+    # Get the path to the project directory
+
     data = request.get_json()
-    port = 9545
     rawmaterial = data.get('rawmaterial')
     productid = data.get('productid')
+    port = 9545
+    # start_node(port)
+    print(Web3_instances)
     index = ports_in_use.index(port)
     w3 = Web3_instances[index]
     contract = contracts[index]
+    balance_before = w3.eth.get_balance(w3.eth.accounts[0])
     trans = contract.functions.addBlock(rawmaterial,[],productid).transact({'from':w3.eth.accounts[0]})
     receipt = w3.eth.wait_for_transaction_receipt(trans)
     gas_cost = receipt['gasUsed']
     print("Gas used:", gas_cost)
     print("Transaction receipt:", receipt)
-    balance_before = w3.eth.get_balance(w3.eth.accounts[0])
     receipt_data = {
         'balance-before': balance_before,
         'transaction_hash': receipt['transactionHash'].hex(),
@@ -295,7 +315,4 @@ def addrawmaterial():
 
 if __name__ == '__main__':
     start_node(9545)
-    print(Web3_instances)
-    # start_node(9090)
-    print(Web3_instances)
     app.run(debug=True)

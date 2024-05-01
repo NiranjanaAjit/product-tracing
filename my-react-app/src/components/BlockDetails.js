@@ -28,14 +28,20 @@ const BlockDetails = () => {
             data ? (
                 // <p>Data from Flask API: {data.message}</p>
                 <div className='display-div'>
-                  <p>blockchain :  </p>
+                  <p>Product Details :  </p>
                   {Object.keys(data).map((key, index) => (
-                            <p key={index}>{key}: {data[key]}</p>
+                            <p key={index}>{key}: {data[key].toString()}</p>
                         ))}
+                        
                 </div>
             ) : (
                 <p>Loading...</p>
             )}
+            <div>
+                <button className="submit-button" onClick={() => navigate('/search')}>
+                    Search for another block
+                </button>
+            </div>
           
             
         </div>

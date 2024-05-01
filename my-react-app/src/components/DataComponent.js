@@ -7,6 +7,7 @@ const DataComponent = () => {
     useEffect(() => {
         fetch('http://127.0.0.1:5000/api/data',{
         method: 'GET',
+        cors: 'no-cors',
         headers:{
           'Content-Type': 'application/json'
         }})

@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
     const [input, setInput] = useState('');
-    // const [prevAddr, setPrevAddr] = useState('');
-    // const [productId, setProductId] = useState('');
+    // const [port, setPort] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -37,9 +36,12 @@ const Search = () => {
           </div>
             
                 <div className='label-inputs'>
-                    <label className='inputs'>BlockNumber</label>
+                    <label className='inputs'>Product ID</label>
                     <br/>
                     <br/>
+                    {/* <label className='inputs'>Port</label>
+                    <br/>
+                    <br/> */}
                 </div>
                 <div>
                 <form onSubmit={handleSubmit}>
@@ -47,10 +49,18 @@ const Search = () => {
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder="Enter block number"
+                    placeholder="Enter product ID"
                 />
                 <br/>
                 <br/>
+                {/* <input className='input-box'
+                    type="text"
+                    value={port}
+                    onChange={(e) => setPort(e.target.value)}
+                    placeholder="Enter port"
+                />
+                <br/> */}
+
                 <button className='update-button' type="submit">
                     Search for block
                 </button>
