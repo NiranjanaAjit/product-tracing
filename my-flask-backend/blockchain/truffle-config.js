@@ -70,6 +70,13 @@ module.exports = {
      network_id: "*",       // Any network (default: none)
     },
 
+    // // Additional network for port 9090
+    development9090: {
+      host: "127.0.0.1",
+      port: 9090,
+      network_id: "*", // Match any network id
+    },
+
     
     // advanced: {
     //   port: 9090,

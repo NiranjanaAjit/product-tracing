@@ -6,6 +6,20 @@ from datetime import datetime
 import subprocess
 import os
 
+# import subprocess
+# subprocess.Popen(["ganache-cli -p 9545"])
+# subprocess.Popen(["ganache-cli -p 9090"])
+# os.system('truffle migrate --network development')
+# os.system('truffle migrate --network development9090')
+
+
+with open('blockchain\\build\\contracts\\gfg.json') as file:
+    contract_json = json.load(file)
+    contract_abi = contract_json['abi']
+    networks = contract_json['networks']
+    addresses = [networks[key]['address'] for key in networks.keys()]
+    
+
 #global variables
 ports_in_use = []
 Web3_instances = []
@@ -61,31 +75,35 @@ def start_node(port):
     compiled_contract_path = 'blockchain\\build\\contracts\\gfg.json'
     deployed_contract_address = ''
     if port == 9545:
-        deployed_contract_address = '0x80261cD982328aF68e7dB8409270F2E6E902eb1B'
+        deployed_contract_address = '0xb4414e34Da54b18B16Bda8B26253de5005650EbD'
         # load contract info as JSON
         with open(compiled_contract_path) as file:
             contract_json = json.load(file)  
             
             # fetch contract's abi - necessary to call its functions
             contract_abi = contract_json['abi']
+            # print(contract_abi)
         contract = w3.eth.contract(address = deployed_contract_address, abi = contract_abi)
         # print(contract)
         contracts.append(contract)
         ports_in_use.append(port)
         Web3_instances.append(w3)
-    elif port == '9090':
-        deployed_contract_address = '0xcBa99367B8f26b2860745aBf257BE18FC949Bc6D'
+    elif port == 9090:
+        deployed_contract_address = '0x1af696296944AC53F6e235E15c578bbC4188ff65'
         # load contract info as JSON
         with open(compiled_contract_path) as file:
             contract_json = json.load(file)  
             
             # fetch contract's abi - necessary to call its functions
             contract_abi = contract_json['abi']
+            # print(contract_abi)
+            # print(contract_json)
         contract = w3.eth.contract(address = deployed_contract_address, abi = contract_abi)
         # print(contract)
         contracts.append(contract)
         ports_in_use.append(port)
         Web3_instances.append(w3)
+
     print(Web3_instances, contracts, ports_in_use)
 
 
@@ -151,60 +169,6 @@ def button_data():
         index = ports_in_use.index(port)
 
 
-    # elif a == 'add':
-        
-    #     print("Add a block")
-    #     # port = input("Enter port number of node: ")
-    #     port = 9545
-    #     # if port in ports_in_use:
-    #     index = ports_in_use.index(port)
-    #     #     # continue with the rest of the code
-    #     # else:
-    #     #     print("Port not found in ports_in_use")
-    #     w3 = Web3_instances[index]
-    #     print('balance before adding block')
-    #     print_balance(w3)
-    #     # add_block(w3,index)
-    #     contract = contracts[index]
-    #     f=open('blockchain\\formdata.json','r')
-    #     data=json.load(f)
-    #     descr = data['descr']
-    #     p=data['prevAddr']
-    #     if p=="":
-    #         prev_addr = []
-    #     else:
-    #         prev_addr = list(map(int,p.split(" ")))
-    #     product_id=data['productId']
-    #     balance_before = w3.eth.get_balance(w3.eth.accounts[0])
-    #     trans = contract.functions.addBlock(descr,prev_addr,product_id).transact({'from':w3.eth.accounts[0]})
-    #     receipt = w3.eth.wait_for_transaction_receipt(trans)
-    #     gas_cost = receipt['gasUsed']
-    #     print("Gas used:", gas_cost)
-    #     print("Transaction receipt:", receipt)
-
-    #     receipt_data = {
-    #         'balance-before': balance_before,
-    #         'transaction_hash': receipt['transactionHash'].hex(),
-    #         'gas_used': receipt['gasUsed'],
-    #         'status': receipt['status'],
-    #         'from': receipt['from'],
-    #         'to': receipt['to'],
-            
-    #         # 'time_stamp' : datetime.fromtimestamp(receipt['timestamp']),
-    #         'balance-after': w3.eth.get_balance(w3.eth.accounts[0])
-    #     }
-    #     print('receipt data', receipt_data)
-    #     with open('blockchain/receipt.json', 'w') as f:
-    #         json.dump(receipt_data, f)
-    #     print('written to recept file')
-
-
-
-    #     print('balance after adding block')
-    #     print_balance(w3)
-
-   
-
     else:
         print("Invalid choice")
 
@@ -237,6 +201,8 @@ def get_block_details():
 @app.route('/api/data', methods=['GET'])
 def get_data():
     port = 9545
+    print("hello")
+
     index = ports_in_use.index(port)
     print(index)
     w3 = Web3_instances[index]
@@ -270,7 +236,8 @@ def addrawmaterial():
     data = request.get_json()
     rawmaterial = data.get('rawmaterial')
     productid = data.get('productid')
-    port = 9545
+    port = 9090
+
     # start_node(port)
     print(Web3_instances)
     index = ports_in_use.index(port)
@@ -315,4 +282,7 @@ def addrawmaterial():
 
 if __name__ == '__main__':
     start_node(9545)
+    print("started node at 9545")
+    start_node(9090)
+    print("started node at 9090")
     app.run(debug=True)
