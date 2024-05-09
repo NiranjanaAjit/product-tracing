@@ -11,7 +11,8 @@ contract gfg{
 
     struct Block{
         string descr;
-        uint[] prev_addr;
+        string[] prev_addr;
+        
         string product_id;
         // bytes32 blockHash;
     }
@@ -19,7 +20,7 @@ contract gfg{
 
     Block[] public blockchain;
 
-    function addBlock(string memory _descr, uint[] memory _prev_addr, string memory _product_id) public {
+    function addBlock(string memory _descr, string[] memory _prev_addr, string memory _product_id) public {
         // bytes32 blockHash = keccak256(abi.encodePacked(_descr, _prev_addr, _product_id));
         blockchain.push(Block(_descr,_prev_addr,_product_id));
     }

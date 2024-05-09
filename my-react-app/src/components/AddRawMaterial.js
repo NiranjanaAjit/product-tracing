@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const AddRawMaterial = () => {
     const [rawmaterial, setrawmaterial] = useState('');
     const [productid, setproductid] = useState('');
-    // const [port, setPort] = useState('');
+    const [port, setPort] = useState('');
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -15,7 +15,7 @@ const AddRawMaterial = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ rawmaterial, productid})
+            body: JSON.stringify({ rawmaterial, productid, port})
         });
         if (response.ok) {
 
@@ -43,7 +43,7 @@ const AddRawMaterial = () => {
                     <label className='inputs'>Product ID</label>
                     <br/>
                     <br/>
-                    {/* <label className='inputs'>Port</label> */}
+                    <label className='inputs'>Port</label>
                 </div>
 
                 <div>
@@ -63,21 +63,18 @@ const AddRawMaterial = () => {
                 />
                 <br/>
                 <br/>
-                {/* <input className='input-box'
+                <input className='input-box'
                     type="text"
                     value={port}
                     onChange={(e) => setPort(e.target.value)}
                     placeholder="Enter port"
                 />
-                 */}
+                
                 <button className='update-button' type="submit">
                     Add Raw Material
                 </button>
                 </form>
                 </div>
-
-                
-            
         </div>
     );
 };

@@ -38,7 +38,7 @@ export default function Home(){
         <div className="home">
             <h1>Product Tracing System</h1>
             
-            <button className="submit-button" name="display" onClick={handleClick}>
+            <button className="submit-button" name="searchchain" onClick={handleClick}>
                     Display blockchain
             </button>
             
@@ -47,13 +47,13 @@ export default function Home(){
             </button>
 
             <button className="submit-button" name="search" onClick={handleClick}>
-                    Search details of the block
+                    Search details of a block
             </button>
 
 
-            <button className="submit-button" name="addrawmaterial" onClick={handleClick}>
+            {/* <button className="submit-button" name="addrawmaterial" onClick={handleClick}>
                     Add Raw Material
-            </button>
+            </button> */}
             
             
         </div>

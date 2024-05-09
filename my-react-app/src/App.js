@@ -8,6 +8,7 @@ import Receipt from './components/Receipt';
 import Search from './components/Search';
 import BlockDetails from './components/BlockDetails';
 import AddRawMaterial from './components/AddRawMaterial';
+import SearchBlockchain from './components/SearchBlockchain';
 
 
 
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/search" element={<Search />}></Route>
             <Route path="/blockdetails" element={<BlockDetails/>}></Route>
             <Route path="/addrawmaterial" element={<AddRawMaterial/>}></Route>
+            <Route path="/searchchain" element = {<SearchBlockchain/>}></Route>
         </Routes>
         </Router>
 

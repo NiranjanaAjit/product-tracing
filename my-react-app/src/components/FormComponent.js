@@ -6,6 +6,7 @@ const FormComponent = () => {
     const [descr, setDescr] = useState('');
     const [prevAddr, setPrevAddr] = useState('');
     const [productId, setProductId] = useState('');
+    const [port, setPort] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -16,7 +17,7 @@ const FormComponent = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ descr, prevAddr, productId })
+            body: JSON.stringify({ descr, prevAddr, productId, port})
         });
         if (response.ok) {
 
@@ -40,12 +41,14 @@ const FormComponent = () => {
 
                     <label className='inputs'>Used</label>
                     <br/>
-                <br/>
+                    <br/>
 
                     <label className='inputs'>Product ID</label>
                     <br/>
+                    <br/>
+                <label className='inputs'>Port</label>
+                    <br/>
                 <br/>
-
                 </div>
                 <div>
                 <form onSubmit={handleSubmit}>
@@ -57,12 +60,12 @@ const FormComponent = () => {
                 />
                 <br/>
                 <br/>
-                
+
                 <input className='input-box'
                     type="text"
                     value={prevAddr}
                     onChange={(e) => setPrevAddr(e.target.value)}
-                    placeholder="Enter product IDs used"
+                    placeholder="Enter product IDs used (space seperated)"
                 />
                 <br/>
                 <br/>
@@ -72,6 +75,14 @@ const FormComponent = () => {
                     value={productId}
                     onChange={(e) => setProductId(e.target.value)}
                     placeholder="Enter product id"
+                />
+                <br/>
+                <br/>
+                <input className='input-box'
+                    type="text"
+                    value={port}
+                    onChange={(e) => setPort(e.target.value)}
+                    placeholder="Enter port"
                 />
                 <br/>
                 <br/>

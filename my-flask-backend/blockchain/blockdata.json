@@ -1,1 +1,1 @@
-{"descr": "cloth", "prev_blocks": [4], "product_id": "5", "block_number": 4, "block_hash": "0x1aedb2e8e6bb4e3a1068a0b28a64018969ab7880c267f2cf34ed817feba134a9", "block_timestamp": "2024-04-30T09:19:00"}
+{"port": 9090, "descr": "added cotton and plastic", "prev_blocks": ["1", "2"], "product_id": "3", "block_number": 1, "block_hash": "0xd4bb743865d246185209dda3a5a816a6cc4787eb5ac5e45c1ebfc68df4ffedd9", "block_timestamp": "2024-05-09T12:06:03"}

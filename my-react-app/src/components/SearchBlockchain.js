@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Search = () => {
-    const [input, setInput] = useState('');
-    // const [port, setPort] = useState('');
+const SearchBlockchain = () => {
+    // const [input, setInput] = useState('');
+    const [port, setPort] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         // Send input data to backend
-        const response = await fetch('http://localhost:5000/api/searchblock', {
+        const response = await fetch('http://localhost:5000/api/searchchain', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ input })
+            body: JSON.stringify({ port })
         });
         if (response.ok) {
 
@@ -24,7 +24,7 @@ const Search = () => {
             console.error('Error:', response.status, response.statusText);
         
         }
-        navigate('/blockdetails');
+        navigate('/display');
     };
 
     return (
@@ -36,33 +36,24 @@ const Search = () => {
           </div>
             
                 <div className='label-inputs'>
-                    <label className='inputs'>Product ID</label>
+                    <label className='inputs'>Port</label>
                     <br/>
                     <br/>
-                    {/* <label className='inputs'>Port</label>
-                    <br/>
-                    <br/> */}
                 </div>
                 <div>
                 <form onSubmit={handleSubmit}>
+                <br/>
+                <br/>
                 <input className='input-box'
-                    type="text"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder="Enter product ID"
-                />
-                <br/>
-                <br/>
-                {/* <input className='input-box'
                     type="text"
                     value={port}
                     onChange={(e) => setPort(e.target.value)}
                     placeholder="Enter port"
                 />
-                <br/> */}
+                <br/>
 
                 <button className='update-button' type="submit">
-                    Search for product
+                    Get blockchain
                 </button>
                 </form>
                 </div>
@@ -73,4 +64,4 @@ const Search = () => {
     );
 };
 
-export default Search;
+export default SearchBlockchain;
